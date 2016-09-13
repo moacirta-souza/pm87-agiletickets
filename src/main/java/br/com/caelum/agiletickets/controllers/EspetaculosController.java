@@ -89,10 +89,16 @@ public class EspetaculosController {
 		// cria sessoes baseado no periodo de inicio e fim passados pelo usuario
 		List<Sessao> sessoes = espetaculo.criaSessoes(inicio, fim, horario, periodicidade);
 
-		agenda.agende(sessoes);
+		if (sessoes != null) {
+			agenda.agende(sessoes);
 
-		result.include("message", sessoes.size() + " sessões criadas com sucesso");
-		result.redirectTo(this).lista();
+			result.include("message", sessoes.size() + " sessões criadas com sucesso");
+			result.redirectTo(this).lista();
+		} else {
+			validator.add(new SimpleMessage("", "Não foi possível incluir uma nova sessão"));
+			// em caso de erro, redireciona para a lista de sessao
+			validator.onErrorRedirectTo(this).lista();
+		}
 	}
 	
 	@Get("/sessao/{id}")
