@@ -45,8 +45,7 @@
 			<form action="<c:url value="/sessao/${sessao.id}/reserva"/>" method="post">
 				<h3>Reservar ingresso</h3>
 				<label for="qtde">Quantidade</label>
-				<input id="qtde" name="quantidade"/>
-				
+				<input id="qtde" name="quantidade" maxlength="10"/>
 				<input type="submit" value="Reservar"/>
 			</form>
 		</c:if>
